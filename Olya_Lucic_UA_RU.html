@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>olya.lucic — Авторські тури по Відню та Австрії</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat & Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind Config Customization -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            handwriting: ['Caveat', 'cursive'],
+          },
+          colors: {
+            brand: {
+              orange: '#ff5500',
+              accent: '#ff8c00',
+              blue: '#2575fc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans font-normal antialiased overflow-x-hidden">
+
+  <!-- HERO SECTION -->
+<section class="relative min-h-screen text-white bg-cover bg-center flex flex-col justify-between" 
+         style="background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1920&q=80');">
+  
+  <!-- HEADER (Full Width) -->
+  <header class="w-full px-6 lg:px-12 py-6">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+<a href="#" id="dev-trigger" class="flex flex-col select-none cursor-pointer">
+  <span class="text-4xl font-handwriting font-bold tracking-tight leading-none text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">olya.lucic</span>
+  <span class="text-[9px] uppercase tracking-wider -ml-2 text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">ГІД У ВІДНІ ТА АВСТРІЇ</span>
+</a>
+
+<div id="dev-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 transition-opacity duration-200 font-mono overflow-hidden">
+  
+  <!-- Динамический фоновый матричный холст -->
+  <div id="dev-matrix-bg" class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none overflow-hidden select-none">
+    <canvas id="matrix-canvas" class="absolute inset-0 w-full h-full"></canvas>
+  </div>
+
+  <!-- Сама модалка, которая появляется из центра -->
+  <div id="dev-modal-content" class="relative bg-black border-2 border-dashed border-emerald-500 p-6 rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.5),8px_8px_0px_0px_rgba(16,185,129,0.9)] max-w-xs w-full text-center transform scale-50 rotate-[-15deg] opacity-0 transition-all duration-400 ease-out pointer-events-auto z-20 overflow-hidden">
+    
+    <!-- Зеленый матричный фон внутри самой модалки -->
+    <div class="absolute inset-0 opacity-20 pointer-events-none text-[10px] leading-3 text-emerald-400 overflow-hidden select-none text-left p-2">
+      10101 01010 11100 00101 10111 00011 11010 01010 11100 00101 01010 11100
+    </div>
+
+    <!-- Кнопка закрытия -->
+    <button type="button" id="dev-modal-close" class="absolute top-3 right-3 text-emerald-500/60 hover:text-emerald-400 text-xs font-bold transition z-30 cursor-pointer">
+      [X]
+    </button>
+    
+    <!-- Статус терминала -->
+    <div class="text-left text-[11px] text-emerald-500/70 mb-3 space-y-0.5 relative z-10">
+      <p>> break_through_dom...</p>
+      <p class="text-emerald-400 animate-pulse">> access_granted: root</p>
+    </div>
+
+    <!-- Блок с именем в стиле глитча -->
+    <div class="py-4 border-y border-emerald-500/30 my-3 bg-emerald-950/50 rounded-lg p-2 relative z-10">
+      <p class="text-[10px] uppercase tracking-widest text-emerald-500/60">Designed and Developed by</p>
+      <div id="spider-glitch-name" class="inline-flex flex-wrap justify-center text-xl font-extrabold tracking-wider min-h-[32px] mb-3">
+        <!-- Буквы генерируются скриптом -->
+      </div>
+
+      <!-- Имейлы под именем -->
+      <div class="flex flex-col gap-1 pt-2 border-t border-emerald-500/20 text-xs">
+        <a href="mailto:yevhen.bredis@gmail.com" class="text-emerald-400 animate-pulse hover:text-emerald-300 hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.8)] transition-all">
+          yevhen.bredis@gmail.com
+        </a>
+        <a href="mailto:y.bredis@gmail.com" class="text-emerald-400 animate-pulse hover:text-emerald-300 hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.8)] transition-all">
+          y.bredis@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <div class="text-[9px] text-emerald-600/80 tracking-widest relative z-10 mt-3">
+      // 09.2026 // VIENNA_AT
+    </div>
+  </div>
+
+  <!-- YouTube плеер закрепленный в правом нижнем углу экрана (появляется вместе с модалкой) -->
+  <div id="fixed-yt-container" class="fixed bottom-4 right-4 z-30 opacity-0 transform translate-y-4 transition-all duration-300 pointer-events-auto rounded-lg overflow-hidden border border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.3)] bg-black">
+    <iframe id="visible-yt-player" src="https://www.youtube-nocookie.com/embed/_wTXagKvqQ8" width="280" height="140" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Nav Links -->
+<nav class="hidden lg:flex items-center gap-8 text-[14px] tracking-wide font-medium">
+  <a href="#about" class="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] hover:text-brand-accent transition">Про мене</a>
+  <a href="#whyme" class="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] hover:text-brand-accent transition">Чому саме я</a>
+  <a href="#tours" class="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] hover:text-brand-accent transition">Тури</a>
+  <a href="#book" class="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] hover:text-brand-accent transition">Як забронювати</a>
+  <a href="#reviews" class="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] hover:text-brand-accent transition">Відгуки</a>
+  <a href="#contacts" class="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] hover:text-brand-accent transition">Контакти</a>
+</nav>
+
+      <!-- Language switcher + Header CTA Button -->
+<div class="flex items-center gap-2.5">
+  <!-- Переключатель языков -->
+      <div class="flex justify-end">
+        <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-1 bg-white rounded-full border-2 border-slate-900 p-1" aria-label="Language switcher">
+          <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="min-w-10 h-8 px-2 rounded-full bg-slate-900 text-white font-bold text-xs tracking-wider transition-all">UA</button>
+          <button type="button" data-set-lang="ru" title="Русский" aria-label="Русский" class="min-w-10 h-8 px-2 rounded-full text-slate-500 font-bold text-xs tracking-wider transition-all">RU</button>
+        </div>
+      </div>
+
+  <!-- Кнопка связи -->
+  <a href="#contacts" class="relative inline-flex items-center justify-center gap-2 bg-black/40 hover:bg-black/50 backdrop-blur-sm text-white py-2 px-4 rounded-2xl border-2 border-slate-900  hover:translate-x-[2px] hover:translate-y-[2px]  active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all text-xs font-bold uppercase tracking-wider h-[42px] box-border">
+    <span>Зв'язатися зі мною</span>
+    <i class="fa-regular fa-paper-plane text-xs sm:text-sm text-white"></i>
+  </a>
+</div>
+
+    </div>
+  </header>
+
+  <!-- HERO CONTENT -->
+  <div class="max-w-7xl mx-auto px-6 w-full py-12 lg:py-16 my-auto relative">
+    <div class="flex items-center justify-between">
+      
+      <!-- Левый текстовый блок -->
+<div class="max-w-4xl lg:max-w-5xl -ml-2 sm:-ml-6 lg:-ml-24 mt-16">
+  <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[66px] font-bold uppercase leading-tight tracking-tight mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95),_0_1px_3px_rgba(0,0,0,0.9)]">
+    <span class="block text-white">
+      АВТОРСЬКІ 
+      <span class="font-handwriting uppercase text-[1.05em] font-semibold text-sky-400 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] pr-3 inline-block">
+        ТУРИ
+      </span>
+    </span>
+    <span class="block text-white whitespace-nowrap">
+      ПО 
+      <span class="font-handwriting uppercase text-[1.05em] font-semibold text-brand-accent drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] pr-2 inline-block">
+        ВІДНЮ
+      </span> 
+      ТА 
+      <span class="font-handwriting uppercase text-[1.05em] font-semibold text-brand-accent drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+        АВСТРІЇ&thinsp;
+      </span>
+    </span>
+  </h1>
+          
+<p class="font-handwriting font-semibold text-2xl lg:text-3xl text-white flex items-center gap-2 -mt-4 mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
+  Комфортні подорожі з душею, які залишають спогади на все життя
+</p>
+
+<div class="flex flex-wrap gap-4 items-center">
+  <!-- Главная CTA кнопка -->
+  <a href="#tours" class="relative inline-flex items-center gap-2.5 bg-brand-accent hover:bg-orange-600 text-white font-bold py-3.5 px-7 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-200 hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none text-xs sm:text-sm uppercase tracking-wider">
+    <span>Переглянути тури</span>
+    <i class="fa-solid fa-compass text-base animate-spin-slow"></i>
+  </a>
+
+  <!-- Сочный плашка-стикер с соцсетями -->
+  <div class="relative inline-flex items-center gap-2.5 bg-white p-2 px-3 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(56,189,248,1)] -rotate-1 hover:rotate-0 transition-transform duration-200">
+    <span class="font-handwriting font-bold text-slate-800 text-sm uppercase pl-1 pr-0.5 select-none">
+      Напишіть мені:
+    </span>
+
+    <!-- Telegram -->
+    <a href="https://t.me/Olya_Lucic" target="_blank" title="Telegram" 
+       class="w-9 h-9 rounded-xl bg-sky-400 hover:bg-sky-500 text-white flex items-center justify-center text-lg border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none">
+      <i class="fa-brands fa-telegram"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://instagram.com/olya.lucic" target="_blank" title="Instagram" 
+       class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center text-lg border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/436769688959" target="_blank" title="WhatsApp" 
+       class="w-9 h-9 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center text-lg border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+</div>
+</div>
+
+      <!-- Правая круглая плашка -->
+<div class="hidden xl:flex shrink-0 mr-4 lg:mr-8 w-52 h-52 border-1 border-dashed rounded-full flex-col items-center justify-center text-center p-2 bg-black/40 backdrop-blur-sm rotate-3 shadow-[6px_6px_0px_0px_rgba(255,255,255,0.9)] -mt-28">
+  <div class="font-bold text-base lg:text-lg uppercase tracking-wider leading-snug flex flex-col items-center text-white drop-shadow-md">
+    <span><span class="font-handwriting text-brand-accent text-xl lg:text-2xl font-bold">ТУРИ</span>, ЯКІ</span>
+    <span class="font-handwriting text-sky-400 text-xl lg:text-2xl font-bold">ЗАКОХУЮТЬ</span>
+    <span>З ПЕРШОГО</span>
+    <span class="inline-flex items-center gap-1.5">
+      ПОГЛЯДУ <i class="fa-solid fa-heart text-rose-500 text-sm"></i>
+    </span>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <!-- FEATURES BAR (В едином стиле с круглой плашкой) -->
+<!-- FEATURES BAR (Секция на белой подложке в 4 колонки с иконками и текстом) -->
+<div class="w-full bg-white text-slate-900 py-3.5 px-4 sm:px-6 shadow-md border-b border-slate-100">
+  <div class="max-w-[88rem] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+
+    <!-- Элемент 1 -->
+    <div class="flex items-center gap-[10px]">
+      <div class="w-10 h-10 rounded-full border-2 border-sky-500 bg-sky-50 text-sky-500 text-lg shrink-0 flex items-center justify-center">
+        <i class="fa-solid fa-bus"></i>
+      </div>
+      <div class="flex flex-col justify-center">
+        <h4 class="font-handwriting font-bold text-[16px] uppercase tracking-wider text-sky-500 leading-none">АВТОБУСНІ ТУРИ</h4>
+        <p class="font-medium text-[13px] text-slate-900 leading-tight">комфортні групові подорожі Європою</p>
+      </div>
+    </div>
+
+    <!-- Элемент 2 -->
+    <div class="flex items-center gap-[10px]">
+      <div class="w-10 h-10 rounded-full border-2 border-orange-500 bg-orange-50 text-orange-500 text-lg shrink-0 flex items-center justify-center">
+        <i class="fa-solid fa-user-check"></i>
+      </div>
+      <div class="flex flex-col justify-center">
+        <h4 class="font-handwriting font-bold text-[16px] uppercase tracking-wider text-orange-500 leading-none">АВТОРСЬКИЙ ПІДХІД</h4>
+        <p class="font-medium text-[13px] text-slate-900 leading-tight">унікальні маршрути та програми</p>
+      </div>
+    </div>
+
+    <!-- Элемент 3 -->
+    <div class="flex items-center gap-[10px]">
+      <div class="w-10 h-10 rounded-full border-2 border-sky-500 bg-sky-50 text-sky-500 text-lg shrink-0 flex items-center justify-center">
+        <i class="fa-solid fa-shield-heart"></i>
+      </div>
+      <div class="flex flex-col justify-center">
+        <h4 class="font-handwriting font-bold text-[16px] uppercase tracking-wider text-sky-500 leading-none">ТУРБОТА ТА ПІДТРИМКА</h4>
+        <p class="font-medium text-[13px] text-slate-900 leading-tight">підтримка 24/7 під час подорожі</p>
+      </div>
+    </div>
+
+    <!-- Элемент 4 -->
+    <div class="flex items-center gap-[10px]">
+      <div class="w-10 h-10 rounded-full border-2 border-orange-500 bg-orange-50 text-orange-500 text-lg shrink-0 flex items-center justify-center">
+        <i class="fa-solid fa-heart"></i>
+      </div>
+      <div class="flex flex-col justify-center">
+        <h4 class="font-handwriting font-bold text-[16px] uppercase tracking-wider text-orange-500 leading-none">МАЛІ ГРУПИ</h4>
+        <p class="font-medium text-[13px] text-slate-900 leading-tight">дружня атмосфера та нові знайомства</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="py-16 sm:py-20 lg:py-16 bg-stone-50 text-slate-900 relative overflow-hidden">
+
+  <!-- Фон: Зошит у косу лінію -->
+  <div class="absolute inset-0 z-0 opacity-40 pointer-events-none" 
+       style="background-image: 
+         repeating-linear-gradient(0deg, #94a3b8, #94a3b8 1px, transparent 1px, transparent 28px),
+         repeating-linear-gradient(-65deg, #cbd5e1, #cbd5e1 1px, transparent 1px, transparent 40px);
+       background-size: 100% 100%;">
+  </div>
+
+  <!-- Вертикальна червона лінія (поля зошита) -->
+  <div class="absolute top-0 bottom-0 left-6 sm:left-12 lg:left-24 w-0 border-r-2 border-rose-400/60 z-0 pointer-events-none"></div>
+
+  <!-- Декоративні отвори блокнота / спіраль ліворуч -->
+  <div class="absolute left-1.5 sm:left-4 top-12 bottom-12 flex flex-col justify-between z-10 pointer-events-none opacity-40 hidden sm:flex">
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+  </div>
+
+  <!-- Декоративні фонові елементи -->
+  <div class="absolute top-10 left-5 w-24 h-24 bg-sky-200/40 rounded-full blur-2xl pointer-events-none"></div>
+  <div class="absolute bottom-10 right-5 w-32 h-32 bg-orange-200/40 rounded-full blur-2xl pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-6 relative z-10 pl-8 sm:pl-16 lg:pl-28">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+      <!-- ЛІВА КОЛОНКА: Блок з фото та стікерами -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="relative w-full max-w-sm sm:max-w-md">
+          
+          <!-- Головна рамка-фотографія -->
+          <div class="relative bg-white p-3 sm:p-4 rounded-3xl border-2 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] -rotate-1 hover:rotate-0 transition-transform duration-300">
+            <div class="overflow-hidden rounded-2xl aspect-[4/5] bg-slate-100">
+              <img src="./ChatGPT Image 11 сент. 2026 г., 17_40_02.png" 
+                   alt="Оля Лючич — Гід у Відні" 
+                   class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Підпис знизу фотографії -->
+            <div class="pt-3 pb-1 text-center">
+              <span class="font-handwriting font-bold text-slate-800 text-xl sm:text-2xl">
+                Оля Лючич ✨
+              </span>
+            </div>
+          </div>
+
+          <!-- Стікер-бедж "7 років у Відні" -->
+<!-- Стікер-бедж "7 років у Відні" -->
+<div class="absolute -top-[16px] -right-[12px] sm:-right-[20px] bg-sky-400 text-white p-[14px] px-[20px] rounded-[16px] border-[2px] border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] rotate-6 flex items-center gap-[8px]">
+  <i class="fa-solid fa-location-dot text-[18px] text-amber-300"></i>
+  <span class="font-handwriting font-bold text-[16px] sm:text-[18px] lg:text-[23px] leading-none">7 років у Відні</span>
+</div>
+
+<!-- Стікер-бедж "Твій гід" -->
+<div class="absolute -bottom-[24px] -left-[90px] bg-brand-accent text-white p-[12px] px-[20px] rounded-[16px] border-[2px] border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] -rotate-6 flex items-center gap-[8px]">
+  <i class="fa-solid fa-heart text-[16px]"></i>
+  <span class="font-handwriting font-bold text-[16px] sm:text-[18px] lg:text-[23px] leading-none">Закохана у місто</span>
+</div>
+
+        </div>
+      </div>
+
+      <!-- ПРАВА КОЛОНКА: Текстовий контент -->
+      <div class="lg:col-span-7 flex flex-col items-start">
+
+        <!-- Заголовок секції -->
+        <div class="inline-block mb-3">
+          <span class="font-handwriting font-bold text-lg sm:text-xl text-sky-500 uppercase tracking-widest block mb-1">
+            Знайомство
+          </span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase text-slate-900 tracking-tight leading-none">
+            ПРИВІТ, Я — <span class="font-handwriting text-brand-accent text-[1.1em] font-bold">Оля!</span>
+          </h2>
+        </div>
+
+        <!-- Короткий опис -->
+        <p class="text-base sm:text-lg text-slate-700 leading-relaxed mb-6 font-medium">
+          Уже понад <span class="bg-amber-200/70 px-1.5 py-0.5 rounded-md font-bold text-slate-900">7 років Відень — мій дім</span>. Я знайомлю людей із містом не через сухі дати з Вікіпедії, а через атмосферу, затишні кав’ярні, секретні дворики та історії, які повертають любов до подорожей.
+        </p>
+
+        <!-- Карточки "Чим займаюсь" та "Для кого" (Стікерний стиль) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mb-8">
+          
+          <!-- Карточка 1 -->
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(56,189,248,1)] flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-xl bg-sky-50 border-2 border-sky-400 text-sky-500 flex items-center justify-center text-base mb-3">
+                <i class="fa-solid fa-route"></i>
+              </div>
+              <h3 class="font-handwriting font-bold text-slate-900 text-lg uppercase tracking-wide mb-1">
+                Чим я займаюсь?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-snug">
+                Створюю авторські прогулянки та автобусні тури, де немає поспіху, а є живі емоції, краса та затишок.
+              </p>
+            </div>
+          </div>
+
+          <!-- Карточка 2 -->
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(249,115,22,1)] flex flex-col justify-between">
+            <div>
+              <div class="w-9 h-9 rounded-xl bg-orange-50 border-2 border-orange-400 text-orange-500 flex items-center justify-center text-base mb-3">
+                <i class="fa-solid fa-users text-sm"></i>
+              </div>
+              <h3 class="font-handwriting font-bold text-slate-900 text-lg uppercase tracking-wide mb-1">
+                Для кого мої тури?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-snug">
+                Для тих, хто цінує душевну атмосферу, малі групи, нові знайомства та хоче відчути місто як місцевий.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Нижня цитата / Плашка -->
+        <div class="w-full bg-slate-900 text-white p-4 sm:p-5 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.3)] flex items-center gap-4">
+          <div class="text-amber-400 text-2xl sm:text-3xl shrink-0">
+            <i class="fa-solid fa-quote-left"></i>
+          </div>
+          <p class="font-handwriting font-medium text-[17px] sm:text-[24px] text-slate-200 leading-snug">
+            Моя мета — зробити так, щоб після прогулянки ви сказали: <span class="text-sky-300 font-bold uppercase"><br>«Я закохався у Відень!»</span>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY ME SECTION -->
+<section id="whyme" class="py-16 sm:py-20 lg:py-16 relative overflow-hidden text-slate-900 bg-slate-900">
+
+  <!-- Фонова фотографія Відня з маскою та градієнтом -->
+  <div class="absolute inset-0 z-0">
+    <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1920&q=80" 
+         alt="Вечірній Відень" 
+         class="w-full h-full object-cover opacity-40">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+
+    <!-- Заголовок секції -->
+    <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 -mt-8">
+      <span class="inline-block bg-amber-300 text-slate-900 font-handwriting font-bold text-xl sm:text-2xl px-4 py-1.5 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] -rotate-2 mb-4">
+        Переваги подорожей зі мною ✨
+      </span>
+<h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase text-white tracking-tight leading-none whitespace-nowrap">
+  ЧОМУ ОБИРАЮТЬ <span class="font-handwriting text-amber-400 text-[1.1em] lowercase font-bold">мої тури?</span>
+</h2>
+    </div>
+
+    <!-- Сітка переваг (4 картки) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+
+      <!-- Картка 1: Авторські маршрути -->
+      <div class="bg-white/95 backdrop-blur-md p-6 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(251,191,36,1)] flex flex-col justify-between hover:-translate-y-2 hover:rotate-1 transition-all duration-300 relative group">
+        <!-- Стікер-номер -->
+        <span class="absolute -top-3 -right-3 bg-brand-accent text-white font-handwriting font-bold text-sm px-3 py-1 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] rotate-6">
+          #1
+        </span>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-amber-400 text-slate-900 border-2 border-slate-900 flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] mb-5">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+          <h3 class="font-handwriting font-bold text-slate-900 text-xl uppercase tracking-wide mb-2">
+            Авторські маршрути
+          </h3>
+          <p class="text-sm text-slate-800 leading-relaxed">
+            Ніяких занудних лекцій та сухої Вікіпедії. Тільки найцікавіші локації, затишні дворики та секретні місця Відня.
+          </p>
+        </div>
+      </div>
+
+      <!-- Картка 2: Індивідуальний підхід -->
+      <div class="bg-white/95 backdrop-blur-md p-6 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(56,189,248,1)] flex flex-col justify-between hover:-translate-y-2 hover:-rotate-1 transition-all duration-300 relative group">
+        <!-- Стікер-номер -->
+        <span class="absolute -top-3 -right-3 bg-sky-400 text-white font-handwriting font-bold text-sm px-3 py-1 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] -rotate-3">
+          #2
+        </span>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-sky-400 text-white border-2 border-slate-900 flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] mb-5">
+            <i class="fa-solid fa-face-smile"></i>
+          </div>
+          <h3 class="font-handwriting font-bold text-slate-900 text-xl uppercase tracking-wide mb-2">
+            Живий контакт
+          </h3>
+          <p class="text-sm text-slate-800 leading-relaxed">
+            Приділяю увагу кожному гостю. Створюю дружню та невимушену атмосферу, де комфортно почувається кожен.
+          </p>
+        </div>
+      </div>
+
+      <!-- Картка 3: Гнучкість -->
+      <div class="bg-white/95 backdrop-blur-md p-6 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(249,115,22,1)] flex flex-col justify-between hover:-translate-y-2 hover:rotate-1 transition-all duration-300 relative group">
+        <!-- Стікер-номер -->
+        <span class="absolute -top-3 -right-3 bg-amber-400 text-slate-900 font-handwriting font-bold text-sm px-3 py-1 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] rotate-3">
+          #3
+        </span>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-brand-accent text-white border-2 border-slate-900 flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] mb-5">
+            <i class="fa-solid fa-cloud-sun text-lg"></i>
+          </div>
+          <h3 class="font-handwriting font-bold text-slate-900 text-xl uppercase tracking-wide mb-2">
+            Гнучкість за часом
+          </h3>
+          <p class="text-sm text-slate-800 leading-relaxed">
+            Легко адаптуємо темп, робимо паузи на каву, а в разі негоди — коригуємо програму без втрати емоцій.
+          </p>
+        </div>
+      </div>
+
+      <!-- Картка 4: Турбота та допомога -->
+      <div class="bg-white/95 backdrop-blur-md p-6 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(16,185,129,1)] flex flex-col justify-between hover:-translate-y-2 hover:-rotate-1 transition-all duration-300 relative group">
+        <!-- Стікер-номер -->
+        <span class="absolute -top-3 -right-3 bg-emerald-400 text-white font-handwriting font-bold text-sm px-3 py-1 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] -rotate-6">
+          #4
+        </span>
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-emerald-400 text-white border-2 border-slate-900 flex items-center justify-center text-xl shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] mb-5">
+            <i class="fa-solid fa-heart-circle-check"></i>
+          </div>
+          <h3 class="font-handwriting font-bold text-slate-900 text-xl uppercase tracking-wide mb-2">
+            Турбота та поради
+          </h3>
+          <p class="text-sm text-slate-800 leading-relaxed">
+            Підкажу найкращі заклади, куди піти ввечері, як зекономити на транспорті та що привезти з Австрії.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- TOURS SECTION (WHITE NOTEBOOK GRID PATTERN) -->
+<section id="tours" class="relative py-16 sm:py-20 lg:py-24 bg-stone-50 text-slate-900 overflow-hidden">
+
+  <!-- Фон: Белая тетрадь в серую клеточку -->
+  <div class="absolute inset-0 z-0 opacity-40 pointer-events-none" 
+       style="background-image: linear-gradient(to right, #94a3b8 1px, transparent 1px), linear-gradient(to bottom, #94a3b8 1px, transparent 1px); background-size: 20px 20px;">
+  </div>
+
+  <!-- Вертикальная красная/розовая линия (поля тетради) -->
+  <div class="absolute top-0 bottom-0 left-6 sm:left-12 lg:left-24 w-0 border-r-2 border-rose-400/60 z-0 pointer-events-none"></div>
+
+  <!-- Декоративные отверстия блокнота / спираль слева -->
+  <div class="absolute left-1.5 sm:left-4 top-12 bottom-12 flex flex-col justify-between z-10 pointer-events-none opacity-40 hidden sm:flex">
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+    <div class="w-4 h-4 rounded-full bg-stone-300 border-2 border-stone-400 shadow-inner"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 pl-8 sm:pl-16 lg:pl-28">
+
+    <!-- Заголовок секции -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 -mt-16">
+      <span class="mb-5 inline-flex -rotate-2 items-center gap-2 rounded-xl border-2 border-slate-900 bg-amber-300 px-5 py-2 font-handwriting text-2xl sm:text-3xl font-bold text-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]">
+        Обирай свій маршрут 🧭
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase text-slate-900 tracking-tight leading-tight">
+        АВТОРСЬКІ <span class="font-handwriting text-amber-500 text-[1.15em] lowercase font-bold">тури та прогулянки</span>
+      </h2>
+    </div>
+
+    <!-- Сетка: 3 карточки в ряд на ПК, 2 на планшетах, 1 на смартфонах -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
+
+      <!-- ТУР 1 -->
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(251,191,36,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900">
+          <img src="./carrie-borden-z83p6MEhv-w-unsplash.jpg" alt="Класичний Відень" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+          
+          <span class="absolute top-3 left-3 bg-white text-slate-900 font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] -rotate-2 z-10">
+            <i class="fa-regular fa-clock text-sky-500 mr-1.5"></i> 2.5 години
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Класичний Відень
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Собор Св. Стефана, Хофбург, Ратуша, Опера та секретні дворики старого міста.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">від €35 <span class="text-xs sm:text-sm font-sans text-slate-600 font-medium">/ особа</span></span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-sky-400 hover:bg-sky-500 text-slate-900 font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Уточнити</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ТУР 2 -->
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(56,189,248,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900">
+          <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=600&q=80" alt="Вечірні легенди" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+          <span class="absolute top-3 left-3 bg-white text-slate-900 font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] rotate-2 z-10">
+            <i class="fa-regular fa-clock text-sky-500 mr-1.5"></i> 2 години
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Вечірні легенди
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Міські міфи, масонські символи, легенда про Базиліска та вогні вечірнього міста.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">від €40 <span class="text-xs sm:text-sm font-sans text-slate-600 font-medium">/ особа</span></span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-sky-400 hover:bg-sky-500 text-slate-900 font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Уточнити</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ТУР 3 -->
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(251,191,36,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900">
+          <img src="./akshaye-sikand-lQIwq0Js_RY-unsplash.jpg" alt="Замок Шенбрунн" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+          <span class="absolute top-3 left-3 bg-white text-slate-900 font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] -rotate-1 z-10">
+            <i class="fa-regular fa-clock text-sky-500 mr-1.5"></i> 3 години
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Замок Шенбрунн
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Різнобарвні сади, Глорієтта, таємниці династії Габсбургів та імператриці Сісі.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">від €45 <span class="text-xs sm:text-sm font-sans text-slate-600 font-medium">/ особа</span></span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-sky-400 hover:bg-sky-500 text-slate-900 font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Уточнити</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ТУР 4 -->
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(249,115,22,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Кава та Захер" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+          <span class="absolute top-3 left-3 bg-white text-slate-900 font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] rotate-3 z-10">
+            <i class="fa-regular fa-clock text-sky-500 mr-1.5"></i> 2.5 години
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Кава та Захер
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Найстаріші кав’ярні міста, дегустація торта, шніцель та культові кондитерські.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">від €50 <span class="text-xs sm:text-sm font-sans text-slate-600 font-medium">/ особа</span></span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-sky-400 hover:bg-sky-500 text-slate-900 font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Уточнити</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ТУР 5 -->
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(16,185,129,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Казковий Гальштат" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+          <span class="absolute top-3 left-3 bg-amber-300 text-slate-900 font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] -rotate-2 z-10">
+            <i class="fa-solid fa-bus text-slate-900 mr-1.5"></i> 1 день
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Казковий Гальштат
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Автобусний тур до найгарнішого озерного містечка Австрії серед Альп.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">від €85 <span class="text-xs sm:text-sm font-sans text-slate-600 font-medium">/ особа</span></span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-sky-400 hover:bg-sky-500 text-slate-900 font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Уточнити</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ТУР 6 -->
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(56,189,248,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900">
+          <img src="https://images.unsplash.com/photo-1599946347371-68eb71b16afc?auto=format&fit=crop&w=600&q=80" alt="Романтичний Зальцбург" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+          <span class="absolute top-3 left-3 bg-amber-300 text-slate-900 font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] rotate-1 z-10">
+            <i class="fa-solid fa-bus text-slate-900 mr-1.5"></i> 1 день
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Романтичний Зальцбург
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Батьківщина Моцарта, фортеця Хоензальцбург, сади Мірабель та Альпи.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">від €90 <span class="text-xs sm:text-sm font-sans text-slate-600 font-medium">/ особа</span></span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-sky-400 hover:bg-sky-500 text-slate-900 font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Уточнити</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ТУР 7 -->
+      <div class="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(251,191,36,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900">
+          <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=600&q=80" alt="Долина Вахау та Вино" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+          <span class="absolute top-3 left-3 bg-white text-slate-900 font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] -rotate-3 z-10">
+            <i class="fa-regular fa-clock text-sky-500 mr-1.5"></i> 5 годин
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Долина Вахау та Вино
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Замки уздовж Дунаю, абрикосові сади, старовинне аббатство Мельк та дегустації.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">від €65 <span class="text-xs sm:text-sm font-sans text-slate-600 font-medium">/ особа</span></span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-sky-400 hover:bg-sky-500 text-slate-900 font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Уточнити</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ТУР 8 -->
+      <div class="bg-amber-100 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(249,115,22,1)] flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-200">
+        <div class="relative h-80 sm:h-96 w-full overflow-hidden border-b-2 border-slate-900 bg-amber-200">
+          <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80" alt="Свій маршрут" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+          <span class="absolute top-3 right-3 bg-orange-500 text-white font-handwriting font-bold text-[20px] px-3.5 py-1.5 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] rotate-3 z-10">
+            VIP ⭐
+          </span>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+            <h3 class="font-extrabold text-2xl uppercase leading-tight mb-1 drop-shadow">
+              Свій маршрут
+            </h3>
+            <p class="text-xs sm:text-sm text-stone-200 line-clamp-2 drop-shadow">
+              Складемо програму виключно під ваші побажання, темп та уподобання.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-amber-100 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3.5">
+            <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Вартість:</span>
+            <span class="font-handwriting font-bold text-xl sm:text-2xl text-amber-600 text-right">Договірна</span>
+          </div>
+          <a href="https://t.me/Olya_Lucic" target="_blank" class="w-full py-3 px-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-2 text-sm sm:text-base uppercase tracking-wider">
+            <span>Скласти тур</span>
+            <i class="fa-paper-plane fa-regular"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW TO BOOK SECTION -->
+<section id="book" class="py-12 sm:py-16 lg:py-12 bg-slate-900 text-slate-900 relative overflow-hidden">
+
+  <!-- Фонова фотографія Відня з маскою та градієнтом -->
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1920&q=80" 
+         alt="Фон Відень" 
+         class="w-full h-full object-cover opacity-30">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/75 to-slate-900/95"></div>
+  </div>
+
+  <!-- Креативний шар: напівпрозора сітка зошита поверх фото -->
+  <div class="absolute inset-0 z-0 opacity-15 pointer-events-none" 
+       style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 24px 24px;">
+  </div>
+
+  <!-- Декоративні розмиті кольорові плями -->
+  <div class="absolute top-1/2 left-10 w-64 h-64 bg-sky-400/20 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
+  <div class="absolute top-1/2 right-10 w-64 h-64 bg-amber-400/20 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
+
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+
+    <!-- Заголовок секції -->
+    <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+      <span class="inline-block bg-sky-300 text-slate-900 font-handwriting font-bold text-base sm:text-2xl px-4 py-1.5 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] -rotate-1 mb-3">
+        Все максимально просто 👌
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase text-white tracking-tight leading-none whitespace-nowrap">
+        ЯК ЗАБРОНЮВАТИ <span class="font-handwriting text-brand-accent text-[1.1em] lowercase font-bold">подорож?</span>
+      </h2>
+    </div>
+
+    <!-- Сітка з 3 кроків -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 relative">
+
+      <!-- КРОК 1 -->
+      <div class="bg-amber-50/95 backdrop-blur-md p-7 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(251,191,36,1)] flex flex-col justify-between relative hover:-translate-y-1 transition-transform duration-200 group">
+        <!-- Стікер-номер -->
+        <div class="absolute -top-5 left-6 bg-brand-accent text-white font-handwriting font-bold text-lg px-4 py-1 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] -rotate-3">
+          Крок 1 💬
+        </div>
+
+        <div class="pt-2">
+          <!-- Іконка -->
+          <div class="w-14 h-14 rounded-2xl bg-white text-brand-accent border-2 border-slate-900 flex items-center justify-center text-2xl shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] mb-6 mt-2">
+            <i class="fa-regular fa-paper-plane"></i>
+          </div>
+          <h3 class="font-handwriting font-bold text-slate-900 text-2xl uppercase tracking-wide mb-3">
+            1. Написали мені
+          </h3>
+          <p class="text-sm text-slate-700 leading-relaxed font-medium">
+            Обирайте тур або просто напишіть у Telegram чи WhatsApp, які дати вас цікавлять і скільки вас людей.
+          </p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t-2 border-dashed border-amber-300">
+          <span class="text-xs sm:text-sm text-slate-800 uppercase">Відповідь протягом 15 хвилин</span>
+        </div>
+      </div>
+
+      <!-- КРОК 2 -->
+      <div class="bg-sky-50/95 backdrop-blur-md p-7 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(56,189,248,1)] flex flex-col justify-between relative hover:-translate-y-1 transition-transform duration-200 group">
+        <!-- Стікер-номер -->
+        <div class="absolute -top-5 left-6 bg-sky-400 text-white font-handwriting font-bold text-lg px-4 py-1 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] rotate-2">
+          Крок 2 🗓️
+        </div>
+
+        <div class="pt-2">
+          <!-- Іконка -->
+          <div class="w-14 h-14 rounded-2xl bg-white text-sky-500 border-2 border-slate-900 flex items-center justify-center text-2xl shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] mb-6 mt-2">
+            <i class="fa-regular fa-calendar-check"></i>
+          </div>
+          <h3 class="font-handwriting font-bold text-slate-900 text-2xl uppercase tracking-wide mb-3">
+            2. Узгодили час
+          </h3>
+          <p class="text-sm text-slate-700 leading-relaxed font-medium">
+            Уточнюємо зручний час, локацію початку, побажання по темпу та коригуємо програму під вашу групу.
+          </p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t-2 border-dashed border-sky-300">
+          <span class=" text-xs sm:text-sm text-slate-800 uppercase">Гнучкий графік</span>
+        </div>
+      </div>
+
+      <!-- КРОК 3 -->
+      <div class="bg-emerald-50/95 backdrop-blur-md p-7 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(16,185,129,1)] flex flex-col justify-between relative hover:-translate-y-1 transition-transform duration-200 group">
+        <!-- Стікер-номер -->
+        <div class="absolute -top-5 left-6 bg-emerald-400 text-white font-handwriting font-bold text-lg px-4 py-1 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] -rotate-2">
+          Крок 3 ✨
+        </div>
+
+        <div class="pt-2">
+          <!-- Іконка -->
+          <div class="w-14 h-14 rounded-2xl bg-white text-emerald-500 border-2 border-slate-900 flex items-center justify-center text-2xl shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] mb-6 mt-2">
+            <i class="fa-solid fa-map-pin"></i>
+          </div>
+          <h3 class="font-handwriting font-bold text-slate-900 text-2xl uppercase tracking-wide mb-3">
+            3. Зустрілись і кайфуємо
+          </h3>
+          <p class="text-sm text-slate-700 leading-relaxed font-medium">
+            Зустрічаємось у призначеному місці, знайомимось та вирушаємо у затишну пригоду по Відню!
+          </p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t-2 border-dashed border-emerald-300">
+          <span class=" text-xs sm:text-sm  text-slate-800 uppercase">Незабутні враження</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Нижня плашка-заклик -->
+    <div class="mt-12 sm:mt-16 text-center">
+      <a href="https://t.me/Olya_Lucic" target="_blank" class="relative inline-flex items-center gap-3 bg-brand-accent hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-2xl border-2 border-slate-900 shadow-[5px_5px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all text-sm sm:text-base uppercase tracking-wider font-handwriting">
+        <span>Забронювати в 1 клік</span>
+        <i class="fa-brands fa-telegram text-lg"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+  <!-- REVIEWS SECTION -->
+<section id="reviews" class="py-12 sm:py-16 lg:py-12 bg-slate-100 text-slate-900 relative overflow-hidden">
+
+  <!-- Фонова фотографія Відня зі світлим (білим) оверлеєм -->
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <img src="https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?auto=format&fit=crop&w=1920&q=80" 
+         alt="Фон Відень" 
+         class="w-full h-full object-cover opacity-70">
+    <div class="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/40 backdrop-blur-[2px]"></div>
+  </div>
+
+  <!-- Декоративні розмиті кольорові плями -->
+  <div class="absolute top-1/3 left-10 w-64 h-64 bg-amber-200/50 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-1/3 right-10 w-64 h-64 bg-sky-200/50 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+
+    <!-- Заголовок секції -->
+    <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 -mt-4">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase text-slate-900 tracking-tight leading-none">
+        ЩО КАЖУТЬ <span class="font-handwriting text-brand-accent text-[1.1em] lowercase font-bold">мандрівники</span>
+      </h2>
+    </div>
+
+    <!-- Сітка відгуків (3 картки) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-8 relative">
+
+      <!-- ВІДГУК 1 -->
+      <div class="bg-amber-50/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(251,191,36,1)] flex flex-col justify-between relative hover:-translate-y-1 transition-transform duration-200 group">
+        <!-- Стікер оцінки -->
+        <div class="absolute -top-5 right-6 bg-white text-slate-900 font-handwriting font-bold text-base px-3 py-1 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] rotate-3 flex items-center gap-1.5">
+          <span>5.0</span>
+          <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+        </div>
+
+        <div>
+          <!-- Профіль автора -->
+          <div class="flex items-center gap-3.5 mb-4">
+            <div class="w-14 h-14 rounded-2xl overflow-hidden border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] shrink-0">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Олена" class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col">
+              <h3 class="font-handwriting font-bold text-slate-900 text-2xl leading-tight mb-0.5">
+                Олена та Ігор
+              </h3>
+              <span class="inline-block bg-amber-200/70 border border-slate-900/20 text-slate-800 text-xs font-semibold px-2 py-0.5 rounded-md w-fit">
+                Тур «Класичний Відень»
+              </span>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-700 leading-relaxed font-medium mb-4">
+            «Це була найкраща прогулянка Віднем! Ніяких нудних дат із підручників — лише захопливі історії, затишні кав'ярні та неймовірні локації для фото. Відчули місто по-справжньому!»
+          </p>
+        </div>
+
+        <div class="pt-4 border-t-2 border-dashed border-amber-300 flex items-center justify-between text-xs text-slate-600 font-semibold tracking-wider">
+          <span class="uppercase">Київ, Україна</span>
+          <i class="fa-brands fa-instagram text-xl text-pink-500"></i>
+        </div>
+      </div>
+
+      <!-- ВІДГУК 2 -->
+      <div class="bg-sky-50/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(56,189,248,1)] flex flex-col justify-between relative hover:-translate-y-1 transition-transform duration-200 group">
+        <!-- Стікер оцінки -->
+        <div class="absolute -top-5 right-6 bg-white text-slate-900 font-handwriting font-bold text-base px-3 py-1 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] -rotate-2 flex items-center gap-1.5">
+          <span>5.0</span>
+          <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+        </div>
+
+        <div>
+          <!-- Профіль автора -->
+          <div class="flex items-center gap-3.5 mb-4">
+            <div class="w-14 h-14 rounded-2xl overflow-hidden border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] shrink-0">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Максим" class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col">
+              <h3 class="font-handwriting font-bold text-slate-900 text-2xl leading-tight mb-0.5">
+                Максим
+              </h3>
+              <span class="inline-block bg-sky-200/70 border border-slate-900/20 text-slate-800 text-xs font-semibold px-2 py-0.5 rounded-md w-fit">
+                Тур «Казковий Гальштат»
+              </span>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-700 leading-relaxed font-medium mb-4">
+            «Їздили в Гальштат — організація на вищому рівні! Все чітко, комфортно та без поспіху. Локації просто космічні, а гіду окремий респект за душевну атмосферу протягом усього дня!»
+          </p>
+        </div>
+
+        <div class="pt-4 border-t-2 border-dashed border-sky-300 flex items-center justify-between text-xs text-slate-600 font-semibold tracking-wider">
+          <span class="uppercase">Львів, Україна</span>
+          <i class="fa-brands fa-telegram text-xl text-sky-500"></i>
+        </div>
+      </div>
+
+      <!-- ВІДГУК 3 -->
+      <div class="bg-emerald-50/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(16,185,129,1)] flex flex-col justify-between relative hover:-translate-y-1 transition-transform duration-200 group">
+        <!-- Стікер оцінки -->
+        <div class="absolute -top-5 right-6 bg-white text-slate-900 font-handwriting font-bold text-base px-3 py-1 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] rotate-1 flex items-center gap-1.5">
+          <span>5.0</span>
+          <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+        </div>
+
+        <div>
+          <!-- Профіль автора -->
+          <div class="flex items-center gap-3.5 mb-4">
+            <div class="w-14 h-14 rounded-2xl overflow-hidden border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] shrink-0">
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" alt="Марія" class="w-full h-full object-cover">
+            </div>
+            <div class="flex flex-col">
+              <h3 class="font-handwriting font-bold text-slate-900 text-2xl leading-tight mb-0.5">
+                Марія з родиною
+              </h3>
+              <span class="inline-block bg-emerald-200/70 border border-slate-900/20 text-slate-800 text-xs font-semibold px-2 py-0.5 rounded-md w-fit">
+                Індивідуальний маршрут
+              </span>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-700 leading-relaxed font-medium mb-4">
+            «Замовляли VIP-тур для всієї сім’ї з дітьми. Програму підлаштували під наш темп, діти в захопленні, батьки відпочили. Обов'язково звернемося ще раз, коли повернемося!»
+          </p>
+        </div>
+
+        <div class="pt-4 border-t-2 border-dashed border-emerald-300 flex items-center justify-between text-xs text-slate-600 font-semibold tracking-wider">
+          <span class="uppercase">Одеса, Україна</span>
+          <i class="fa-brands fa-whatsapp text-xl text-emerald-500"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Нижня плашка з закликом -->
+    <div class="mt-8 sm:mt-8 text-center">
+      <a href="https://instagram.com/olya.lucic" target="_blank" class="relative inline-flex items-center gap-3 bg-brand-accent hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-2xl border-2 border-slate-900 shadow-[5px_5px_0px_0px_rgba(15,23,42,1)] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all text-sm sm:text-base uppercase tracking-wider font-handwriting">
+        <span>Читати більше відгуків у Instagram</span>
+        <i class="fa-brands fa-instagram text-xl"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contacts" class="py-12 sm:py-16 lg:py-8 bg-white text-slate-900 relative overflow-hidden border-t-4 border-slate-900">
+
+  <!-- Фон: Білий зошит у лінійку з червоним полем -->
+  <div class="absolute inset-0 z-0 opacity-20 pointer-events-none" 
+       style="background-image: linear-gradient(to bottom, #0f172a 1px, transparent 1px); background-size: 100% 28px;">
+  </div>
+  <!-- Червоне поле зошита -->
+  <div class="absolute top-0 bottom-0 left-8 sm:left-16 w-[2px] bg-red-400 opacity-50 z-0 pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+
+    <!-- Заголовок -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-10">
+      <span class="inline-block bg-emerald-300 text-slate-900 font-handwriting font-bold text-base sm:text-2xl px-4 py-1.5 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] rotate-1 mb-3">
+        Завжди на зв'язку 💬
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase text-slate-900 tracking-tight leading-none">
+        НАПИШІТЬ <span class="font-handwriting text-brand-accent text-[1.1em] lowercase font-bold">нам</span>
+      </h2>
+      <!-- <p class="text-slate-600 text-sm sm:text-base font-medium mt-3">
+        Оберіть зручний месенджер — відповідаємо протягом 5 хвилин!
+      </p> -->
+    </div>
+
+    <!-- Великі кнопки контактів (WhatsApp, Telegram, Instagram) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/436769688959" target="_blank" 
+         class="bg-white hover:bg-emerald-50 text-slate-900 p-6 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(16,185,129,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(16,185,129,1)] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all flex items-center gap-4 group">
+        <div class="w-14 h-14 bg-emerald-400 rounded-2xl border-2 border-slate-900 flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] shrink-0 group-hover:rotate-6 transition-transform">
+          <i class="fa-brands fa-whatsapp text-2xl text-slate-900"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-handwriting font-bold text-2xl text-slate-900 leading-none">WhatsApp</span>
+          <span class="text-sm text-slate-600 font-semibold mt-0.5">+43 676 968 8959</span>
+        </div>
+      </a>
+
+      <!-- Telegram -->
+      <a href="https://t.me/Olya_Lucic" target="_blank" 
+         class="bg-white hover:bg-sky-50 text-slate-900 p-6 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(56,189,248,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(56,189,248,1)] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all flex items-center gap-4 group">
+        <div class="w-14 h-14 bg-sky-400 rounded-2xl border-2 border-slate-900 flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] shrink-0 group-hover:-rotate-6 transition-transform">
+          <i class="fa-brands fa-telegram text-2xl text-slate-900"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-handwriting font-bold text-2xl text-slate-900 leading-none">Telegram</span>
+          <span class="text-sm text-slate-600 font-semibold mt-0.5">@Olya_Lucic</span>
+        </div>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/olya.lucic" target="_blank" 
+         class="bg-white hover:bg-pink-50 text-slate-900 p-6 rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(244,114,182,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(244,114,182,1)] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none transition-all flex items-center gap-4 group">
+        <div class="w-14 h-14 bg-pink-400 rounded-2xl border-2 border-slate-900 flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] shrink-0 group-hover:rotate-6 transition-transform">
+          <i class="fa-brands fa-instagram text-2xl text-slate-900"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-handwriting font-bold text-2xl text-slate-900 leading-none">Instagram</span>
+          <span class="text-sm text-slate-600 font-semibold mt-0.5">@olya.lucic</span>
+        </div>
+      </a>
+
+    </div>
+      <div class="mt-4 flex justify-end">
+        <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-1 bg-white rounded-full border-2 border-slate-900 p-1 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]" aria-label="Language switcher">
+          <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="min-w-10 h-8 px-2 rounded-full bg-slate-900 text-white font-bold text-xs tracking-wider transition-all">UA</button>
+          <button type="button" data-set-lang="ru" title="Русский" aria-label="Русский" class="min-w-10 h-8 px-2 rounded-full text-slate-500 font-bold text-xs tracking-wider transition-all">RU</button>
+        </div>
+      </div>
+    <!-- Нижня лінія та копірайт -->
+
+      <p class="text-sm text-slate-500 font-medium -ml-16">
+        © 2026 Olya Lucic. Всі права захищено.
+      </p>
+
+
+
+
+  </div>
+</footer>
+
+  <!-- CTA / SUBSCRIBE SECTION -->
+  <!-- <section class="py-16 bg-cover bg-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1476514525535-ce74f45814d3?auto=format&fit=crop&w=1920&q=80');">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-8">
+      <div>
+        <h2 class="text-2xl lg:text-3xl font-bold uppercase tracking-tight">ГОТОВІ ДО НОВИХ ВРАЖЕНЬ?</h2>
+        <p class="text-sm font-normal opacity-90 mt-1">Підпишіться, щоб першими дізнаватися про нові тури та спеціальні пропозиції!</p>
+      </div>
+
+      <form class="w-full lg:w-auto flex-grow max-w-md bg-white p-1.5 rounded-full flex items-center" onsubmit="event.preventDefault();">
+        <input type="email" placeholder="Ваш e-mail" required class="w-full px-5 py-3 text-sm text-slate-800 font-normal focus:outline-none rounded-full">
+        <button type="submit" class="bg-gradient-to-r from-brand-accent to-brand-orange hover:shadow-md text-white font-semibold py-3 px-6 rounded-full text-xs uppercase tracking-wide whitespace-nowrap flex items-center gap-2 transition">
+          Підписатися <i class="fa-regular fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </section> -->
+
+  <!-- UA / RU language switching -->
+  <script>
+  (() => {
+    const translations = {
+  "ru": {
+    "olya.lucic — Авторські тури по Відню та Австрії": "olya.lucic — Авторские туры по Вене и Австрии",
+    "ГІД У ВІДНІ ТА АВСТРІЇ": "ГИД В ВЕНЕ И АВСТРИИ",
+    "Про мене": "Обо мне",
+    "Чому саме я": "Почему именно я",
+    "Тури": "Туры",
+    "Як забронювати": "Как забронировать",
+    "Відгуки": "Отзывы",
+    "Контакти": "Контакты",
+    "Зв'язатися зі мною": "Связаться со мной",
+    "АВТОРСЬКІ": "АВТОРСКИЕ",
+    "ТУРИ": "ТУРЫ",
+    "ВІДНЮ": "ВЕНЕ",
+    "ТА": "И",
+    "АВСТРІЇ": "АВСТРИИ",
+    "Комфортні подорожі з душею, які залишають спогади на все життя": "Комфортные путешествия с душой, которые оставляют воспоминания на всю жизнь",
+    "Переглянути тури": "Посмотреть туры",
+    "Напишіть мені:": "Напишите мне:",
+    ", ЯКІ": ", КОТОРЫЕ",
+    "ЗАКОХУЮТЬ": "ВЛЮБЛЯЮТ",
+    "З ПЕРШОГО": "С ПЕРВОГО",
+    "ПОГЛЯДУ": "ВЗГЛЯДА",
+    "АВТОБУСНІ ТУРИ": "АВТОБУСНЫЕ ТУРЫ",
+    "комфортні групові подорожі Європою": "комфортные групповые путешествия по Европе",
+    "АВТОРСЬКИЙ ПІДХІД": "АВТОРСКИЙ ПОДХОД",
+    "унікальні маршрути та програми": "уникальные маршруты и программы",
+    "ТУРБОТА ТА ПІДТРИМКА": "ЗАБОТА И ПОДДЕРЖКА",
+    "підтримка 24/7 під час подорожі": "поддержка 24/7 во время путешествия",
+    "МАЛІ ГРУПИ": "МАЛЫЕ ГРУППЫ",
+    "дружня атмосфера та нові знайомства": "дружеская атмосфера и новые знакомства",
+    "Оля Лючич ✨": "Оля Лючич ✨",
+    "7 років у Відні": "7 лет в Вене",
+    "Закохана у місто": "Влюблена в город",
+    "Знайомство": "Знакомство",
+    "ПРИВІТ, Я —": "ПРИВЕТ, Я —",
+    "Уже понад": "Уже больше",
+    "7 років Відень — мій дім": "7 лет Вена — мой дом",
+    ". Я знайомлю людей із містом не через сухі дати з Вікіпедії, а через атмосферу, затишні кав’ярні, секретні дворики та історії, які повертають любов до подорожей.": ". Я знакомлю людей с городом не через сухие даты из Википедии, а через атмосферу, уютные кофейни, секретные дворики и истории, которые возвращают любовь к путешествиям.",
+    "Чим я займаюсь?": "Чем я занимаюсь?",
+    "Створюю авторські прогулянки та автобусні тури, де немає поспіху, а є живі емоції, краса та затишок.": "Создаю авторские прогулки и автобусные туры, где нет спешки, зато есть живые эмоции, красота и уют.",
+    "Для кого мої тури?": "Для кого мои туры?",
+    "Для тих, хто цінує душевну атмосферу, малі групи, нові знайомства та хоче відчути місто як місцевий.": "Для тех, кто ценит душевную атмосферу, малые группы, новые знакомства и хочет почувствовать город как местный житель.",
+    "Моя мета — зробити так, щоб після прогулянки ви сказали:": "Моя цель — сделать так, чтобы после прогулки вы сказали:",
+    "«Я закохався у Відень!»": "«Я влюбился в Вену!»",
+    "Переваги подорожей зі мною ✨": "Преимущества путешествий со мной ✨",
+    "ЧОМУ ОБИРАЮТЬ": "ПОЧЕМУ ВЫБИРАЮТ",
+    "мої тури?": "мои туры?",
+    "Авторські маршрути": "Авторские маршруты",
+    "Ніяких занудних лекцій та сухої Вікіпедії. Тільки найцікавіші локації, затишні дворики та секретні місця Відня.": "Никаких скучных лекций и сухой Википедии. Только самые интересные локации, уютные дворики и секретные места Вены.",
+    "Живий контакт": "Живое общение",
+    "Приділяю увагу кожному гостю. Створюю дружню та невимушену атмосферу, де комфортно почувається кожен.": "Уделяю внимание каждому гостю. Создаю дружескую и непринужденную атмосферу, в которой комфортно каждому.",
+    "Гнучкість за часом": "Гибкость по времени",
+    "Легко адаптуємо темп, робимо паузи на каву, а в разі негоди — коригуємо програму без втрати емоцій.": "Легко адаптируем темп, делаем паузы на кофе, а в случае непогоды — корректируем программу без потери эмоций.",
+    "Турбота та поради": "Забота и советы",
+    "Підкажу найкращі заклади, куди піти ввечері, як зекономити на транспорті та що привезти з Австрії.": "Подскажу лучшие заведения, куда сходить вечером, как сэкономить на транспорте и что привезти из Австрии.",
+    "Обирай свій маршрут 🧭": "Выбирай свой маршрут 🧭",
+    "тури та прогулянки": "туры и прогулки",
+    "2.5 години": "2.5 часа",
+    "Класичний Відень": "Классическая Вена",
+    "Собор Св. Стефана, Хофбург, Ратуша, Опера та секретні дворики старого міста.": "Собор Св. Стефана, Хофбург, Ратуша, Опера и секретные дворики старого города.",
+    "Вартість:": "Стоимость:",
+    "від €35": "от €35",
+    "/ особа": "/ человек",
+    "Уточнити": "Уточнить",
+    "2 години": "2 часа",
+    "Вечірні легенди": "Вечерние легенды",
+    "Міські міфи, масонські символи, легенда про Базиліска та вогні вечірнього міста.": "Городские мифы, масонские символы, легенда о Василиске и огни вечернего города.",
+    "від €40": "от €40",
+    "3 години": "3 часа",
+    "Замок Шенбрунн": "Дворец Шёнбрунн",
+    "Різнобарвні сади, Глорієтта, таємниці династії Габсбургів та імператриці Сісі.": "Красочные сады, Глориетта, тайны династии Габсбургов и императрицы Сиси.",
+    "від €45": "от €45",
+    "Кава та Захер": "Кофе и Захер",
+    "Найстаріші кав’ярні міста, дегустація торта, шніцель та культові кондитерські.": "Старейшие кофейни города, дегустация торта, шницель и культовые кондитерские.",
+    "від €50": "от €50",
+    "1 день": "1 день",
+    "Казковий Гальштат": "Сказочный Гальштат",
+    "Автобусний тур до найгарнішого озерного містечка Австрії серед Альп.": "Автобусный тур в самый красивый озерный городок Австрии среди Альп.",
+    "від €85": "от €85",
+    "Романтичний Зальцбург": "Романтический Зальцбург",
+    "Батьківщина Моцарта, фортеця Хоензальцбург, сади Мірабель та Альпи.": "Родина Моцарта, крепость Хоэнзальцбург, сады Мирабель и Альпы.",
+    "від €90": "от €90",
+    "5 годин": "5 часов",
+    "Долина Вахау та Вино": "Долина Вахау и вино",
+    "Замки уздовж Дунаю, абрикосові сади, старовинне аббатство Мельк та дегустації.": "Замки вдоль Дуная, абрикосовые сады, старинное аббатство Мельк и дегустации.",
+    "від €65": "от €65",
+    "Свій маршрут": "Свой маршрут",
+    "Складемо програму виключно під ваші побажання, темп та уподобання.": "Составим программу исключительно под ваши пожелания, темп и предпочтения.",
+    "Договірна": "Договорная",
+    "Скласти тур": "Составить тур",
+    "Все максимально просто 👌": "Всё максимально просто 👌",
+    "ЯК ЗАБРОНЮВАТИ": "КАК ЗАБРОНИРОВАТЬ",
+    "подорож?": "путешествие?",
+    "Крок 1 💬": "Шаг 1 💬",
+    "1. Написали мені": "1. Написали мне",
+    "Обирайте тур або просто напишіть у Telegram чи WhatsApp, які дати вас цікавлять і скільки вас людей.": "Выберите тур или просто напишите в Telegram или WhatsApp, какие даты вас интересуют и сколько вас человек.",
+    "Відповідь протягом 15 хвилин": "Ответ в течение 15 минут",
+    "Крок 2 🗓️": "Шаг 2 🗓️",
+    "2. Узгодили час": "2. Согласовали время",
+    "Уточнюємо зручний час, локацію початку, побажання по темпу та коригуємо програму під вашу групу.": "Уточняем удобное время, место начала, пожелания по темпу и корректируем программу под вашу группу.",
+    "Гнучкий графік": "Гибкий график",
+    "Крок 3 ✨": "Шаг 3 ✨",
+    "3. Зустрілись і кайфуємо": "3. Встретились и наслаждаемся",
+    "Зустрічаємось у призначеному місці, знайомимось та вирушаємо у затишну пригоду по Відню!": "Встречаемся в назначенном месте, знакомимся и отправляемся в уютное приключение по Вене!",
+    "Незабутні враження": "Незабываемые впечатления",
+    "Забронювати в 1 клік": "Забронировать в 1 клик",
+    "ЩО КАЖУТЬ": "ЧТО ГОВОРЯТ",
+    "мандрівники": "путешественники",
+    "Олена та Ігор": "Елена и Игорь",
+    "Тур «Класичний Відень»": "Тур «Классическая Вена»",
+    "«Це була найкраща прогулянка Віднем! Ніяких нудних дат із підручників — лише захопливі історії, затишні кав'ярні та неймовірні локації для фото. Відчули місто по-справжньому!»": "«Это была лучшая прогулка по Вене! Никаких скучных дат из учебников — только увлекательные истории, уютные кофейни и невероятные локации для фото. Мы по-настоящему почувствовали город!»",
+    "Київ, Україна": "Киев, Украина",
+    "Тур «Казковий Гальштат»": "Тур «Сказочный Гальштат»",
+    "«Їздили в Гальштат — організація на вищому рівні! Все чітко, комфортно та без поспіху. Локації просто космічні, а гіду окремий респект за душевну атмосферу протягом усього дня!»": "«Ездили в Гальштат — организация на высшем уровне! Всё чётко, комфортно и без спешки. Локации просто космические, а гиду отдельный респект за душевную атмосферу на протяжении всего дня!»",
+    "Львів, Україна": "Львов, Украина",
+    "Марія з родиною": "Мария с семьёй",
+    "Індивідуальний маршрут": "Индивидуальный маршрут",
+    "«Замовляли VIP-тур для всієї сім’ї з дітьми. Програму підлаштували під наш темп, діти в захопленні, батьки відпочили. Обов'язково звернемося ще раз, коли повернемося!»": "«Заказывали VIP-тур для всей семьи с детьми. Программу подстроили под наш темп, дети в восторге, родители отдохнули. Обязательно обратимся ещё раз, когда вернёмся!»",
+    "Одеса, Україна": "Одесса, Украина",
+    "Читати більше відгуків у Instagram": "Читать больше отзывов в Instagram",
+    "Завжди на зв'язку 💬": "Всегда на связи 💬",
+    "НАПИШІТЬ": "НАПИШИТЕ",
+    "© 2026 Olya Lucic. Всі права захищено.": "© 2026 Olya Lucic. Все права защищены.",
+    "Оля Лючич — Гід у Відні": "Оля Лючич — гид в Вене",
+    "Вечірній Відень": "Вечерняя Вена",
+    "Вечірній та Містичний Відень": "Вечерняя и мистическая Вена",
+    "Гастрономічний Відень": "Гастрономическая Вена",
+    "Долина Вахау": "Долина Вахау",
+    "Індивідуальний VIP": "Индивидуальный VIP",
+    "Фон Відень": "Фон Вена",
+    "Олена": "Елена",
+    "Марія": "Мария"
+  }
+};
+    const defaultTitle = document.title;
+    const textRecords = [];
+    const attributeRecords = [];
+
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          if (parent.closest('script, style, [data-no-i18n]')) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    while (walker.nextNode()) {
+      textRecords.push({ node: walker.currentNode, original: walker.currentNode.nodeValue });
+    }
+
+    document.querySelectorAll('[alt], [placeholder]').forEach((el) => {
+      ['alt', 'placeholder'].forEach((attr) => {
+        if (el.hasAttribute(attr)) {
+          attributeRecords.push({ el, attr, original: el.getAttribute(attr) });
+        }
+      });
+    });
+
+    function withOriginalWhitespace(original, replacement) {
+      const start = original.search(/\S/);
+      if (start === -1) return original;
+      const end = original.search(/\s*$/);
+      return original.slice(0, start) + replacement + original.slice(end);
+    }
+
+    function detectLanguage() {
+      const languages = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || 'uk'];
+
+      for (const language of languages) {
+        const normalized = String(language).toLowerCase();
+        if (/^ru(?:-|$)/.test(normalized)) return 'ru';
+        if (/^(?:uk|ua)(?:-|$)/.test(normalized)) return 'uk';
+      }
+      return 'uk';
+    }
+
+    function updateSwitcherState(lang) {
+      document.querySelectorAll('[data-lang-switcher]').forEach((group) => {
+        const theme = group.dataset.langTheme;
+        group.querySelectorAll('[data-set-lang]').forEach((button) => {
+          const active = button.dataset.setLang === lang;
+          button.setAttribute('aria-pressed', String(active));
+
+          if (theme === 'header') {
+            button.classList.toggle('bg-white', active);
+            button.classList.toggle('text-slate-900', active);
+            button.classList.toggle('text-white', !active);
+            button.classList.toggle('opacity-70', !active);
+          } else {
+            button.classList.toggle('bg-slate-900', active);
+            button.classList.toggle('text-white', active);
+            button.classList.toggle('text-slate-500', !active);
+          }
+        });
+      });
+    }
+
+    function applyLanguage(lang) {
+      const dictionary = translations[lang] || {};
+
+      textRecords.forEach((record) => {
+        const key = record.original.trim();
+        const translated = dictionary[key];
+        record.node.nodeValue = translated !== undefined
+          ? withOriginalWhitespace(record.original, translated)
+          : record.original;
+      });
+
+      attributeRecords.forEach((record) => {
+        const translated = dictionary[record.original];
+        record.el.setAttribute(record.attr, translated !== undefined ? translated : record.original);
+      });
+
+      const translatedTitle = dictionary[defaultTitle];
+      document.title = translatedTitle !== undefined ? translatedTitle : defaultTitle;
+      document.documentElement.lang = lang;
+      updateSwitcherState(lang);
+    }
+
+    document.querySelectorAll('[data-set-lang]').forEach((button) => {
+      button.addEventListener('click', () => applyLanguage(button.dataset.setLang));
+    });
+
+    applyLanguage(detectLanguage());
+  })();
+  </script>
+<script>
+  (function() {
+    const trigger = document.getElementById('dev-trigger');
+    const modal = document.getElementById('dev-modal');
+    const modalContent = document.getElementById('dev-modal-content');
+    const matrixBg = document.getElementById('dev-matrix-bg');
+    const ytContainer = document.getElementById('fixed-yt-container');
+    const ytPlayer = document.getElementById('visible-yt-player');
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    const closeBtn = document.getElementById('dev-modal-close');
+    const nameContainer = document.getElementById('spider-glitch-name');
+    
+    const textString = "Yevhen Bredis";
+    let timer = null;
+    let glitchInterval = null;
+    let matrixInterval = null;
+
+    function initMatrixRain() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const fontSize = 14;
+      const columns = Math.floor(canvas.width / fontSize);
+      const drops = [];
+
+      for (let i = 0; i < columns; i++) {
+        drops[i] = 1;
+      }
+
+      function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#10B981';
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = Math.random() > 0.5 ? '1' : '0';
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      matrixInterval = setInterval(draw, 33);
+    }
+
+    function initLetters() {
+      nameContainer.innerHTML = '';
+      textString.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.className = "inline-block transition-all duration-75 text-emerald-400";
+        nameContainer.appendChild(span);
+      });
+    }
+    initLetters();
+
+    function startGlitch() {
+      const letters = nameContainer.querySelectorAll('span');
+      glitchInterval = setInterval(() => {
+        letters.forEach(letter => {
+          if (Math.random() > 0.6) {
+            const randomTranslateX = (Math.random() - 0.5) * 8;
+            const randomTranslateY = (Math.random() - 0.5) * 8;
+            const randomScale = 0.8 + Math.random() * 0.5;
+            const randomRotate = (Math.random() - 0.5) * 20;
+            const colors = ['text-emerald-400', 'text-cyan-400', 'text-rose-500', 'text-white', 'text-amber-300'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            letter.className = `inline-block transition-all duration-75 ${randomColor} font-extrabold`;
+            letter.style.transform = `translate(${randomTranslateX}px, ${randomTranslateY}px) scale(${randomScale}) rotate(${randomRotate}deg)`;
+            letter.style.filter = Math.random() > 0.5 ? 'blur(1px)' : 'none';
+          } else {
+            letter.className = "inline-block transition-all duration-75 text-emerald-400";
+            letter.style.transform = 'translate(0, 0) scale(1) rotate(0deg)';
+            letter.style.filter = 'none';
+          }
+        });
+      }, 120);
+    }
+
+    function stopGlitch() {
+      if (glitchInterval) clearInterval(glitchInterval);
+      if (matrixInterval) clearInterval(matrixInterval);
+      initLetters();
+    }
+
+    const openModal = () => {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      matrixBg.classList.remove('opacity-0');
+      matrixBg.classList.add('opacity-100');
+      initMatrixRain();
+
+      setTimeout(() => {
+        modalContent.classList.remove('scale-50', 'rotate-[-15deg]', 'opacity-0');
+        modalContent.classList.add('scale-100', 'rotate-0', 'opacity-100');
+        
+        // Появление плеера в правом нижнем углу
+        ytContainer.classList.remove('opacity-0', 'translate-y-4');
+        ytContainer.classList.add('opacity-100', 'translate-y-0');
+
+        startGlitch();
+      }, 100);
+    };
+
+    const closeModal = () => {
+      modalContent.classList.remove('scale-100', 'rotate-0', 'opacity-100');
+      modalContent.classList.add('scale-50', 'rotate-[-15deg]', 'opacity-0');
+      
+      // Скрытие и остановка плеера в правом нижнем углу
+      ytContainer.classList.remove('opacity-100', 'translate-y-0');
+      ytContainer.classList.add('opacity-0', 'translate-y-4');
+      const src = ytPlayer.src;
+      ytPlayer.src = '';
+      ytPlayer.src = src;
+
+      stopGlitch();
+
+      matrixBg.classList.remove('opacity-100');
+      matrixBg.classList.add('opacity-0');
+
+      setTimeout(() => {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+      }, 300);
+    };
+
+    trigger.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      timer = setTimeout(openModal, 5000);
+    });
+
+    const clearTimer = () => {
+      if (timer) clearTimeout(timer);
+    };
+
+    window.addEventListener('mouseup', clearTimer);
+    trigger.addEventListener('mouseleave', clearTimer);
+
+    trigger.addEventListener('touchstart', () => {
+      timer = setTimeout(openModal, 5000);
+    });
+    trigger.addEventListener('touchend', clearTimer);
+    trigger.addEventListener('touchmove', clearTimer);
+
+    closeBtn.addEventListener('click', closeModal);
+    matrixBg.addEventListener('click', closeModal);
+  })();
+</script>
+</body>
+</html>
