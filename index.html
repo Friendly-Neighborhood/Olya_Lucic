@@ -35,6 +35,149 @@
       }
     }
   </script>
+
+  <style>
+    /* ===== Responsive hardening: mobile + tablet ===== */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    img, iframe, video, canvas { max-width: 100%; }
+    * { min-width: 0; }
+
+    @media (max-width: 1023px) {
+      header { padding-left: 1rem !important; padding-right: 1rem !important; }
+      header > div { gap: .75rem; }
+      #dev-trigger { flex-shrink: 1; min-width: 0; }
+      #dev-trigger > span:first-child { font-size: 2rem !important; }
+      #dev-trigger > span:last-child { margin-left: 0 !important; font-size: 8px !important; letter-spacing: .08em !important; }
+
+      header .flex.items-center.gap-2\.5 { gap: .5rem !important; flex-shrink: 0; }
+      header [data-lang-switcher] button { min-width: 2.15rem !important; height: 2rem !important; padding-left: .45rem !important; padding-right: .45rem !important; }
+      header a[href="#contacts"] { width: 42px; padding-left: 0 !important; padding-right: 0 !important; border-radius: .8rem !important; }
+      header a[href="#contacts"] span { display: none; }
+
+      .max-w-7xl.mx-auto.px-6.w-full.py-12.lg\:py-16.my-auto.relative { padding-left: 1rem !important; padding-right: 1rem !important; }
+      .max-w-4xl.lg\:max-w-5xl.-ml-2.sm\:-ml-6.lg\:-ml-24.mt-16 { margin-left: 0 !important; margin-top: 2.5rem !important; max-width: 100% !important; }
+    }
+
+    @media (max-width: 767px) {
+      .min-h-screen { min-height: 100svh; }
+
+      /* Hero */
+      h1 { overflow-wrap: anywhere; }
+      h1 .whitespace-nowrap { white-space: normal !important; }
+      h1.text-3xl { font-size: clamp(2rem, 9vw, 3rem) !important; line-height: 1.02 !important; margin-bottom: 1.25rem !important; }
+      .font-handwriting.font-semibold.text-2xl.lg\:text-3xl.text-white.flex.items-center.gap-2.-mt-4.mb-6 { 
+        font-size: 1.3rem !important; line-height: 1.2 !important; margin-top: 0 !important; display: block !important; 
+      }
+      .flex.flex-wrap.gap-4.items-center { gap: .75rem !important; align-items: center !important; }
+      .flex.flex-wrap.gap-4.items-center > a[href="#tours"] { width: 100%; justify-content: center; }
+
+      /* Compact social sticker: keep label + icons on one line */
+      #hero-socials {
+        width: fit-content !important;
+        max-width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: .55rem !important;
+        padding: .5rem .65rem !important;
+      }
+      #hero-socials > span {
+        width: auto !important;
+        flex: 0 0 auto;
+        white-space: nowrap !important;
+        padding-left: .15rem !important;
+        padding-right: .1rem !important;
+      }
+      #hero-socials > a { flex: 0 0 auto; }
+
+      /* Hero feature bar */
+      .max-w-\[88rem\].mx-auto.grid { gap: 1rem !important; }
+      .max-w-\[88rem\].mx-auto.grid > div { align-items: flex-start !important; }
+
+      /* Notebook sections: reclaim horizontal space on phones */
+      #about .max-w-6xl.mx-auto.px-6.relative.z-10.pl-8,
+      #tours .max-w-7xl.mx-auto.px-4.sm\:px-6.relative.z-10.pl-8 { 
+        padding-left: 1rem !important; padding-right: 1rem !important; 
+      }
+      #about > .absolute.top-0.bottom-0.left-6,
+      #tours > .absolute.top-0.bottom-0.left-6 { left: .65rem !important; opacity: .4; }
+
+      /* About stickers */
+      #about .lg\:col-span-5 .relative.w-full.max-w-sm.sm\:max-w-md { padding-bottom: 2rem; }
+      #about .absolute.-top-\[16px\].-right-\[12px\] { 
+        right: .25rem !important; top: -.75rem !important; padding: .55rem .8rem !important; transform: rotate(3deg) !important; 
+      }
+      #about .absolute.-bottom-\[24px\].-left-\[90px\] { 
+        left: .25rem !important; bottom: -1.15rem !important; padding: .55rem .8rem !important; transform: rotate(-3deg) !important; 
+      }
+      #about .absolute.-top-\[16px\] span,
+      #about .absolute.-bottom-\[24px\] span { font-size: 1rem !important; }
+
+      /* Headings that used nowrap and overflowed */
+      #whyme h2.whitespace-nowrap,
+      #book h2.whitespace-nowrap { white-space: normal !important; }
+      #whyme h2, #book h2, #reviews h2, footer h2 { overflow-wrap: anywhere; }
+
+      /* Tours */
+      #tours .text-center.max-w-2xl.mx-auto.mb-10.sm\:mb-14.-mt-16 { margin-top: -1.5rem !important; }
+      #tours .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 { grid-template-columns: minmax(0,1fr) !important; }
+      #tours .relative.h-80.sm\:h-96 { height: 20rem !important; }
+      #tours .p-4.sm\:p-5 .flex.items-center.justify-between { gap: .75rem; align-items: flex-start; }
+      #tours .p-4.sm\:p-5 .flex.items-center.justify-between > span:last-child { max-width: 65%; line-height: 1.05; }
+
+      /* Booking / review cards */
+      #book .grid.grid-cols-1.md\:grid-cols-3,
+      #reviews .grid.grid-cols-1.md\:grid-cols-3 { gap: 2rem !important; }
+      #book .bg-amber-50\/95, #book .bg-sky-50\/95, #book .bg-emerald-50\/95,
+      #reviews .bg-amber-50\/90, #reviews .bg-sky-50\/90, #reviews .bg-emerald-50\/90 { padding: 1.25rem !important; }
+
+      /* Long CTA labels */
+      #reviews a[href*="instagram.com"] { width: 100%; padding-left: 1rem !important; padding-right: 1rem !important; justify-content: center; text-align: center; }
+      #reviews a[href*="instagram.com"] span { white-space: normal !important; line-height: 1.2; }
+
+      /* Footer */
+      footer .grid.grid-cols-1.md\:grid-cols-3 { gap: 1rem !important; margin-bottom: 2rem !important; }
+      footer .grid.grid-cols-1.md\:grid-cols-3 > a { padding: 1rem !important; }
+      footer .grid.grid-cols-1.md\:grid-cols-3 > a .w-14.h-14 { width: 3rem !important; height: 3rem !important; }
+      footer .flex.items-center.justify-between { flex-direction: column; gap: 1rem; text-align: center; }
+
+      /* Dev modal/video */
+      #fixed-yt-container { right: .75rem !important; bottom: .75rem !important; max-width: calc(100vw - 1.5rem); }
+      #visible-yt-player { width: min(200px, calc(100vw - 1.5rem)) !important; height: min(200px, calc(100vw - 1.5rem)) !important; }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      /* Tablet */
+      .max-w-4xl.lg\:max-w-5xl.-ml-2.sm\:-ml-6.lg\:-ml-24.mt-16 { margin-left: 0 !important; }
+      h1 .whitespace-nowrap { white-space: normal !important; }
+      #whyme h2.whitespace-nowrap, #book h2.whitespace-nowrap { white-space: normal !important; }
+      #about .absolute.-bottom-\[24px\].-left-\[90px\] { left: -1rem !important; }
+      #about .absolute.-top-\[16px\].-right-\[12px\] { right: -.5rem !important; }
+      #tours .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      #tours .relative.h-80.sm\:h-96 { height: 22rem !important; }
+      #book .grid.grid-cols-1.md\:grid-cols-3 { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+      #book .grid.grid-cols-1.md\:grid-cols-3 > :last-child { grid-column: 1 / -1; max-width: 32rem; width: 100%; justify-self: center; }
+      #reviews .grid.grid-cols-1.md\:grid-cols-3 { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+      #reviews .grid.grid-cols-1.md\:grid-cols-3 > :last-child { grid-column: 1 / -1; max-width: 32rem; width: 100%; justify-self: center; }
+      footer .grid.grid-cols-1.md\:grid-cols-3 { grid-template-columns: repeat(2,minmax(0,1fr)) !important; max-width: 48rem !important; }
+      footer .grid.grid-cols-1.md\:grid-cols-3 > :last-child { grid-column: 1 / -1; max-width: 24rem; width: 100%; justify-self: center; }
+    }
+
+    @media (max-width: 420px) {
+      header { padding-top: 1rem !important; }
+      #dev-trigger > span:first-child { font-size: 1.75rem !important; }
+      header [data-lang-switcher] { padding: .2rem !important; }
+      header [data-lang-switcher] button { min-width: 1.95rem !important; font-size: 10px !important; }
+      h1.text-3xl { font-size: clamp(1.75rem, 9.2vw, 2.35rem) !important; }
+      #hero-socials { gap: .4rem !important; padding: .45rem .5rem !important; }
+      #hero-socials > span { font-size: .78rem !important; }
+      #hero-socials > a { width: 2.05rem !important; height: 2.05rem !important; font-size: 1rem !important; }
+      #tours .relative.h-80.sm\:h-96 { height: 18rem !important; }
+      #tours .absolute.top-3.left-3, #tours .absolute.top-3.right-3 { font-size: 1rem !important; padding: .35rem .6rem !important; }
+      #tours .absolute.bottom-4.left-4.right-4 h3 { font-size: 1.25rem !important; }
+    }
+  </style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans font-normal antialiased overflow-x-hidden">
 
@@ -173,7 +316,7 @@
   </a>
 
   <!-- Сочный плашка-стикер с соцсетями -->
-  <div class="relative inline-flex items-center gap-2.5 bg-white p-2 px-3 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(56,189,248,1)] -rotate-1 hover:rotate-0 transition-transform duration-200">
+  <div id="hero-socials" class="relative inline-flex items-center gap-2.5 bg-white p-2 px-3 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(56,189,248,1)] -rotate-1 hover:rotate-0 transition-transform duration-200">
     <span class="font-handwriting font-bold text-slate-800 text-sm uppercase pl-1 pr-0.5 select-none">
       Напишіть мені:
     </span>
@@ -1138,19 +1281,19 @@
       </a>
 
     </div>
-      <div class="mt-4 flex justify-end">
-        <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-1 bg-white rounded-full border-2 border-slate-900 p-1 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]" aria-label="Language switcher">
-          <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="min-w-10 h-8 px-2 rounded-full bg-slate-900 text-white font-bold text-xs tracking-wider transition-all">UA</button>
-          <button type="button" data-set-lang="ru" title="Русский" aria-label="Русский" class="min-w-10 h-8 px-2 rounded-full text-slate-500 font-bold text-xs tracking-wider transition-all">RU</button>
-        </div>
-      </div>
+
     <!-- Нижня лінія та копірайт -->
 
-      <p class="text-sm text-slate-500 font-medium -ml-16">
-        © 2026 Olya Lucic. Всі права захищено.
-      </p>
+<div class="flex items-center justify-between">
+  <p class="text-sm text-slate-500 font-medium">
+    © 2026 Olya Lucic. Всі права захищено.
+  </p>
 
-
+  <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-1 bg-white rounded-full border-2 border-slate-900 p-1 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]" aria-label="Language switcher">
+    <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="min-w-10 h-8 px-2 rounded-full bg-slate-900 text-white font-bold text-xs tracking-wider transition-all">UA</button>
+    <button type="button" data-set-lang="ru" title="Русский" aria-label="Русский" class="min-w-10 h-8 px-2 rounded-full text-slate-500 font-bold text-xs tracking-wider transition-all">RU</button>
+  </div>
+</div>
 
 
   </div>
