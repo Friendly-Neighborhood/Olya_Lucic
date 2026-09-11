@@ -206,7 +206,7 @@
   <span class="text-[9px] uppercase tracking-wider -ml-4 text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">тури по Відню та Австрії</span>
 </a>
 
-<div id="dev-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 transition-opacity duration-200 font-mono overflow-hidden">
+<div id="dev-modal" aria-hidden="true" class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 invisible transition-opacity duration-200 font-mono overflow-hidden">
   
   <!-- Динамический фоновый матричный холст -->
   <div id="dev-matrix-bg" class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none overflow-hidden select-none">
@@ -214,7 +214,7 @@
   </div>
 
   <!-- Сама модалка, которая появляется из центра -->
-  <div id="dev-modal-content" class="relative bg-black border-2 border-dashed border-emerald-500 p-6 rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.5),8px_8px_0px_0px_rgba(16,185,129,0.9)] max-w-xs w-full text-center transform scale-50 rotate-[-15deg] opacity-0 transition-all duration-400 ease-out pointer-events-auto z-20 overflow-hidden">
+  <div id="dev-modal-content" class="relative bg-black border-2 border-dashed border-emerald-500 p-6 rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.5),8px_8px_0px_0px_rgba(16,185,129,0.9)] max-w-xs w-full text-center transform scale-50 rotate-[-15deg] opacity-0 transition-all duration-400 ease-out pointer-events-none z-20 overflow-hidden">
     
     <!-- Зеленый матричный фон внутри самой модалки -->
     <div class="absolute inset-0 opacity-20 pointer-events-none text-[10px] leading-3 text-emerald-400 overflow-hidden select-none text-left p-2">
@@ -481,11 +481,10 @@
 </div>
 
 <!-- Стікер-бедж "Твій гід" -->
-<div class="absolute -bottom-[24px] -left-[90px] bg-brand-accent text-white p-[12px] px-[20px] rounded-[16px] border-[2px] border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] -rotate-6 flex items-center gap-[8px]">
+<div class="absolute bottom-[10px] sm:-bottom-[24px] -left-5 sm:-left-[90px] bg-brand-accent text-white p-[12px] px-[20px] rounded-[16px] border-[2px] border-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] -rotate-6 flex items-center gap-[8px]">
   <i class="fa-solid fa-heart text-[16px]"></i>
   <span class="font-handwriting font-bold text-[16px] sm:text-[18px] lg:text-[23px] leading-none">Закохана у місто</span>
 </div>
-
         </div>
       </div>
 
@@ -985,9 +984,9 @@
 
     <!-- Заголовок секції -->
     <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-      <span class="inline-block bg-sky-300 text-slate-900 font-handwriting font-bold text-base sm:text-2xl px-4 py-1.5 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] -rotate-1 mb-3">
-        Все максимально просто 👌
-      </span>
+<span class="inline-block bg-sky-300 text-slate-900 font-handwriting font-bold text-xl sm:text-2xl px-4 py-1.5 rounded-2xl border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] -rotate-1 mb-3">
+    Все максимально просто 👌
+  </span>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase text-white tracking-tight leading-none whitespace-nowrap">
         ЯК ЗАБРОНЮВАТИ <span class="font-handwriting text-brand-accent text-[1.1em] lowercase font-bold">подорож?</span>
       </h2>
@@ -1657,50 +1656,115 @@
       initLetters();
     }
 
- const openModal = () => {
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      matrixBg.classList.remove('opacity-0');
-      matrixBg.classList.add('opacity-100');
-      initMatrixRain();
+/* ЗАМЕНИ openModal И closeModal НА ЭТИ */
 
-      // Вставляем ссылку в iframe ТОЛЬКО при открытии, что запускает загрузку и автоплей
-      const dataSrc = ytPlayer.getAttribute('data-src');
-      if (ytPlayer.src !== dataSrc) {
-        ytPlayer.src = dataSrc;
-      }
+const openModal = () => {
+  modal.setAttribute('aria-hidden', 'false');
 
-      setTimeout(() => {
-        modalContent.classList.remove('scale-50', 'rotate-[-15deg]', 'opacity-0');
-        modalContent.classList.add('scale-100', 'rotate-0', 'opacity-100');
-        
-        // Появление плеера в правом нижнем углу
-        ytContainer.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-        ytContainer.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+  modal.classList.remove(
+    'opacity-0',
+    'pointer-events-none',
+    'invisible'
+  );
 
-        startGlitch();
-      }, 100);
-    };
+  modalContent.classList.remove('pointer-events-none');
+  modalContent.classList.add('pointer-events-auto');
 
-    const closeModal = () => {
-      modalContent.classList.remove('scale-100', 'rotate-0', 'opacity-100');
-      modalContent.classList.add('scale-50', 'rotate-[-15deg]', 'opacity-0');
-      
-      // Скрытие плеера
-      ytContainer.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-      ytContainer.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-      
-      // Полностью очищаем src, чтобы видео гарантированно выключилось и звук пропал
-      ytPlayer.src = '';
+  matrixBg.classList.remove(
+    'opacity-0',
+    'pointer-events-none'
+  );
+  matrixBg.classList.add(
+    'opacity-100',
+    'pointer-events-auto'
+  );
 
-      stopGlitch();
+  initMatrixRain();
 
-      matrixBg.classList.remove('opacity-100');
-      matrixBg.classList.add('opacity-0');
+  const dataSrc = ytPlayer.getAttribute('data-src');
+  if (ytPlayer.src !== dataSrc) {
+    ytPlayer.src = dataSrc;
+  }
 
-      setTimeout(() => {
-        modal.classList.add('opacity-0', 'pointer-events-none');
-      }, 300);
-    };
+  setTimeout(() => {
+    modalContent.classList.remove(
+      'scale-50',
+      'rotate-[-15deg]',
+      'opacity-0'
+    );
+
+    modalContent.classList.add(
+      'scale-100',
+      'rotate-0',
+      'opacity-100'
+    );
+
+    ytContainer.classList.remove(
+      'opacity-0',
+      'translate-y-4',
+      'pointer-events-none'
+    );
+
+    ytContainer.classList.add(
+      'opacity-100',
+      'translate-y-0',
+      'pointer-events-auto'
+    );
+
+    startGlitch();
+  }, 100);
+};
+
+
+const closeModal = () => {
+  /* Сразу запрещаем невидимой модалке ловить клики */
+  modalContent.classList.remove('pointer-events-auto');
+  modalContent.classList.add('pointer-events-none');
+
+  matrixBg.classList.remove('pointer-events-auto');
+  matrixBg.classList.add('pointer-events-none');
+
+  modalContent.classList.remove(
+    'scale-100',
+    'rotate-0',
+    'opacity-100'
+  );
+
+  modalContent.classList.add(
+    'scale-50',
+    'rotate-[-15deg]',
+    'opacity-0'
+  );
+
+  ytContainer.classList.remove(
+    'opacity-100',
+    'translate-y-0',
+    'pointer-events-auto'
+  );
+
+  ytContainer.classList.add(
+    'opacity-0',
+    'translate-y-4',
+    'pointer-events-none'
+  );
+
+  ytPlayer.src = '';
+
+  stopGlitch();
+
+  matrixBg.classList.remove('opacity-100');
+  matrixBg.classList.add('opacity-0');
+
+  setTimeout(() => {
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.classList.add(
+      'opacity-0',
+      'pointer-events-none',
+      'invisible'
+    );
+  }, 300);
+};
 
     trigger.addEventListener('mousedown', (e) => {
       e.preventDefault();
