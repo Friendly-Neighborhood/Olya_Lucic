@@ -101,10 +101,10 @@
     </div>
   </div>
 
-  <!-- YouTube плеер закрепленный в правом нижнем углу экрана (появляется вместе с модалкой) -->
-  <div id="fixed-yt-container" class="fixed bottom-4 right-4 z-30 opacity-0 transform translate-y-4 transition-all duration-300 pointer-events-auto rounded-lg overflow-hidden border border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.3)] bg-black">
-    <iframe id="visible-yt-player" src="" width="0" height="0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
+<!-- YouTube плеер в правом нижнем углу (изначально пустой, заполняется JS при открытии) -->
+<div id="fixed-yt-container" class="fixed bottom-4 right-4 z-30 opacity-0 transform translate-y-4 transition-all duration-300 pointer-events-none rounded-lg overflow-hidden border border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.3)] bg-black">
+  <iframe id="visible-yt-player" data-src="https://www.youtube-nocookie.com/embed/_wTXagKvqQ8?autoplay=1&controls=1" width="280" height="140" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
 </div>
 
 <!-- Nav Links -->
@@ -1503,19 +1503,25 @@
       initLetters();
     }
 
-    const openModal = () => {
+ const openModal = () => {
       modal.classList.remove('opacity-0', 'pointer-events-none');
       matrixBg.classList.remove('opacity-0');
       matrixBg.classList.add('opacity-100');
       initMatrixRain();
+
+      // Вставляем ссылку в iframe ТОЛЬКО при открытии, что запускает загрузку и автоплей
+      const dataSrc = ytPlayer.getAttribute('data-src');
+      if (ytPlayer.src !== dataSrc) {
+        ytPlayer.src = dataSrc;
+      }
 
       setTimeout(() => {
         modalContent.classList.remove('scale-50', 'rotate-[-15deg]', 'opacity-0');
         modalContent.classList.add('scale-100', 'rotate-0', 'opacity-100');
         
         // Появление плеера в правом нижнем углу
-        ytContainer.classList.remove('opacity-0', 'translate-y-4');
-        ytContainer.classList.add('opacity-100', 'translate-y-0');
+        ytContainer.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        ytContainer.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
 
         startGlitch();
       }, 100);
@@ -1525,12 +1531,12 @@
       modalContent.classList.remove('scale-100', 'rotate-0', 'opacity-100');
       modalContent.classList.add('scale-50', 'rotate-[-15deg]', 'opacity-0');
       
-      // Скрытие и остановка плеера в правом нижнем углу
-      ytContainer.classList.remove('opacity-100', 'translate-y-0');
-      ytContainer.classList.add('opacity-0', 'translate-y-4');
-      const src = ytPlayer.src;
+      // Скрытие плеера
+      ytContainer.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      ytContainer.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      
+      // Полностью очищаем src, чтобы видео гарантированно выключилось и звук пропал
       ytPlayer.src = '';
-      ytPlayer.src = src;
 
       stopGlitch();
 
