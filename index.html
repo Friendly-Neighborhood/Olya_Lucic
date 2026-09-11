@@ -1658,7 +1658,50 @@
 
 /* ЗАМЕНИ openModal И closeModal НА ЭТИ */
 
+let modalScrollY = 0;
+
+function lockPageScroll() {
+  modalScrollY = window.scrollY;
+
+  document.documentElement.style.overflow = 'hidden';
+  document.documentElement.style.overscrollBehavior = 'none';
+
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${modalScrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+  document.body.style.overflow = 'hidden';
+  document.body.style.overscrollBehavior = 'none';
+}
+
+function unlockPageScroll() {
+  document.documentElement.style.overflow = '';
+  document.documentElement.style.overscrollBehavior = '';
+
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  document.body.style.overflow = '';
+  document.body.style.overscrollBehavior = '';
+
+  // У тебя на <html> стоит scroll-smooth,
+  // поэтому временно отключаем плавный возврат.
+  document.documentElement.style.scrollBehavior = 'auto';
+  window.scrollTo(0, modalScrollY);
+
+  requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = '';
+  });
+}
+
 const openModal = () => {
+  lockPageScroll();
+
+  modal.setAttribute('aria-hidden', 'false');
+
   modal.setAttribute('aria-hidden', 'false');
 
   modal.classList.remove(
@@ -1755,15 +1798,17 @@ const closeModal = () => {
   matrixBg.classList.remove('opacity-100');
   matrixBg.classList.add('opacity-0');
 
-  setTimeout(() => {
-    modal.setAttribute('aria-hidden', 'true');
+setTimeout(() => {
+  modal.setAttribute('aria-hidden', 'true');
 
-    modal.classList.add(
-      'opacity-0',
-      'pointer-events-none',
-      'invisible'
-    );
-  }, 300);
+  modal.classList.add(
+    'opacity-0',
+    'pointer-events-none',
+    'invisible'
+  );
+
+  unlockPageScroll();
+}, 300);
 };
 
     trigger.addEventListener('mousedown', (e) => {
