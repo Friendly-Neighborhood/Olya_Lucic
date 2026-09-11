@@ -69,12 +69,23 @@
         font-size: 1.3rem !important; line-height: 1.2 !important; margin-top: 0 !important; display: block !important; 
       }
       .flex.flex-wrap.gap-4.items-center { gap: .75rem !important; align-items: center !important; }
-      .flex.flex-wrap.gap-4.items-center > a[href="#tours"] { width: 100%; justify-content: center; }
+
+      /* Hero actions: CTA and social sticker have the same footprint on mobile */
+      #hero-tours-cta,
+      #hero-socials {
+        width: 17rem !important;
+        max-width: 100% !important;
+        min-height: 3.5rem;
+        box-sizing: border-box;
+      }
+      #hero-tours-cta {
+        justify-content: center !important;
+        padding-left: .65rem !important;
+        padding-right: .65rem !important;
+      }
 
       /* Compact social sticker: keep label + icons on one line */
       #hero-socials {
-        width: fit-content !important;
-        max-width: 100% !important;
         flex-wrap: nowrap !important;
         justify-content: flex-start !important;
         align-items: center !important;
@@ -169,6 +180,7 @@
       header [data-lang-switcher] { padding: .2rem !important; }
       header [data-lang-switcher] button { min-width: 1.95rem !important; font-size: 10px !important; }
       h1.text-3xl { font-size: clamp(1.75rem, 9.2vw, 2.35rem) !important; }
+      #hero-tours-cta, #hero-socials { width: 16rem !important; max-width: 100% !important; min-height: 3.25rem; }
       #hero-socials { gap: .4rem !important; padding: .45rem .5rem !important; }
       #hero-socials > span { font-size: .78rem !important; }
       #hero-socials > a { width: 2.05rem !important; height: 2.05rem !important; font-size: 1rem !important; }
@@ -310,7 +322,7 @@
 
 <div class="flex flex-wrap gap-4 items-center">
   <!-- Главная CTA кнопка -->
-  <a href="#tours" class="relative inline-flex items-center gap-2.5 bg-brand-accent hover:bg-orange-600 text-white font-bold py-3.5 px-7 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-200 hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none text-xs sm:text-sm uppercase tracking-wider">
+  <a id="hero-tours-cta" href="#tours" class="relative inline-flex items-center gap-2.5 bg-brand-accent hover:bg-orange-600 text-white font-bold py-3.5 px-7 rounded-2xl border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-200 hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none text-xs sm:text-sm uppercase tracking-wider">
     <span>Переглянути тури</span>
     <i class="fa-solid fa-compass text-base animate-spin-slow"></i>
   </a>
