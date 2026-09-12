@@ -272,19 +272,9 @@
 </nav>
 
       <!-- Language switcher + Header CTA Button -->
-<div class="flex items-center gap-5">
-  <!-- Переключатель языков -->
-<!-- Mobile version (visible only on mobile) -->
-<div class="flex justify-start -ml-2 md:hidden">
-  <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-1 bg-white rounded-full border-2 border-slate-900 p-1" aria-label="Language switcher">
-    <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="min-w-10 h-8 px-2 rounded-full bg-slate-900 text-white font-bold text-xs tracking-wider transition-all">UA</button>
-    <button type="button" data-set-lang="ru" title="Русский" aria-label="Русский" class="min-w-10 h-8 px-2 rounded-full text-slate-500 font-bold text-xs tracking-wider transition-all">RU</button>
-  </div>
-</div>
-
-<!-- Desktop and tablet version (hidden on mobile, visible from md breakpoint up) -->
-<div class="hidden md:flex justify-start">
-  <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-2 text-sm font-semibold" aria-label="Language switcher">
+<div class="flex items-center gap-1 sm:gap-5">
+<div class="flex justify-start -ml-2">
+  <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-0 sm:gap-2 text-sm font-semibold" aria-label="Language switcher">
     <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="text-white transition-colors">UA</button>
     <span class="text-black">|</span>
     <button type="button" data-set-lang="ru" title="Русский" aria-label="Русский" class="text-black hover:text-white transition-colors">RU</button>
