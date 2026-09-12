@@ -274,7 +274,16 @@
       <!-- Language switcher + Header CTA Button -->
 <div class="flex items-center gap-5">
   <!-- Переключатель языков -->
-<div class="flex justify-start">
+<!-- Mobile version (visible only on mobile) -->
+<div class="flex justify-start -ml-2 md:hidden">
+  <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-1 bg-white rounded-full border-2 border-slate-900 p-1" aria-label="Language switcher">
+    <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="min-w-10 h-8 px-2 rounded-full bg-slate-900 text-white font-bold text-xs tracking-wider transition-all">UA</button>
+    <button type="button" data-set-lang="ru" title="Русский" aria-label="Русский" class="min-w-10 h-8 px-2 rounded-full text-slate-500 font-bold text-xs tracking-wider transition-all">RU</button>
+  </div>
+</div>
+
+<!-- Desktop and tablet version (hidden on mobile, visible from md breakpoint up) -->
+<div class="hidden md:flex justify-start">
   <div data-lang-switcher data-lang-theme="footer" data-no-i18n class="inline-flex items-center gap-2 text-sm font-semibold" aria-label="Language switcher">
     <button type="button" data-set-lang="uk" title="Українська" aria-label="Українська" class="text-white transition-colors">UA</button>
     <span class="text-black">|</span>
@@ -298,24 +307,24 @@
       
       <!-- Левый текстовый блок -->
 <div class="max-w-4xl lg:max-w-5xl -ml-2 sm:-ml-6 lg:-ml-24 mt-60">
-  <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[66px] font-bold uppercase leading-tight tracking-tight mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95),_0_1px_3px_rgba(0,0,0,0.9)]">
-    <span class="block text-white">
-      АВТОРСЬКІ 
-      <span class="font-handwriting uppercase text-[1.05em] font-semibold text-sky-400 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] pr-3 inline-block">
-        ТУРИ
-      </span>
-    </span>
-    <span class="block text-white whitespace-nowrap">
-      ПО 
-      <span class="font-handwriting uppercase text-[1.05em] font-semibold text-brand-accent drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] pr-2 inline-block">
-        ВІДНЮ
-      </span> 
-      ТА 
-      <span class="font-handwriting uppercase text-[1.05em] font-semibold text-brand-accent drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
-        АВСТРІЇ&thinsp;
-      </span>
+<div class="text-[34px] sm:text-4xl md:text-5xl lg:text-[65px] font-bold uppercase leading-tight tracking-tight mb-0 lg:mb-6 [text-shadow:_0_4px_24px_rgba(0,0,0,0.95),_0_1px_3px_rgba(0,0,0,0.9)]">
+  <h1 class="block text-white">
+    АВТОРСЬКІ 
+    <span class="font-handwriting uppercase text-[1.05em] font-semibold text-sky-400 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] pr-3 inline-block">
+      ТУРИ
     </span>
   </h1>
+  <span class="block text-white whitespace-nowrap">
+    ПО 
+    <span class="font-handwriting uppercase text-[1.05em] font-semibold text-brand-accent drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] pr-2 inline-block">
+      ВІДНЮ
+    </span> 
+    ТА 
+    <span class="font-handwriting uppercase text-[1.05em] font-semibold text-brand-accent drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+      АВСТРІЇ&thinsp;
+    </span>
+  </span>
+</div>
           
 <p class="font-handwriting font-semibold text-2xl lg:text-3xl text-white flex items-center gap-2 -mt-4 mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] [text-shadow:_0_2px_10px_rgba(0,0,0,0.9)]">
   Комфортні подорожі з душею, які залишають спогади на все життя
@@ -1470,16 +1479,28 @@
 function updateSwitcherState(lang) {
       document.querySelectorAll('[data-lang-switcher]').forEach((group) => {
         const theme = group.dataset.langTheme;
+        
+        // Check if this specific switcher is inside a mobile-only wrapper
+        const isMobileSwitcher = group.closest('.md\\:hidden') !== null;
+
         group.querySelectorAll('[data-set-lang]').forEach((button) => {
           const active = button.dataset.setLang === lang;
           button.setAttribute('aria-pressed', String(active));
 
-          if (theme === 'header') {
-            button.classList.toggle('bg-white', active);
-            button.classList.toggle('text-slate-900', active);
-            button.classList.toggle('text-white', !active);
-            button.classList.toggle('opacity-70', !active);
+          if (isMobileSwitcher) {
+            // Pill switcher behavior for mobile
+            if (theme === 'header') {
+              button.classList.toggle('bg-white', active);
+              button.classList.toggle('text-slate-900', active);
+              button.classList.toggle('text-white', !active);
+              button.classList.toggle('opacity-70', !active);
+            } else {
+              button.classList.toggle('bg-slate-900', active);
+              button.classList.toggle('text-white', active);
+              button.classList.toggle('text-slate-500', !active);
+            }
           } else {
+            // Text switcher behavior for desktop/tablet
             button.classList.toggle('text-white', active);
             button.classList.toggle('text-black', !active);
           }
